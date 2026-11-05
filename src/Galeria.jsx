@@ -141,7 +141,7 @@ export default function Galeria() {
                   <ModelViewer
                     key={modeloActivo.id}
                     // URL corregida a Supabase Storage
-                    url={`https://ndhrgqmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modeloActivo.archivo}`}
+                    url={`https://ndhrggqmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modeloActivo.archivo}`}
                   />
                 </Stage>
               </Suspense>
