@@ -90,7 +90,7 @@ export default function Inicio() {
                   <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
                     <ModelViewer
                       // URL corregida a Supabase Storage
-                      url={`https://ndhrggqmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modeloDestacado.archivo}`}
+                      url={`https://ndhrggmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modeloDestacado.archivo}`}
                     />
                   </Stage>
                 </Suspense>

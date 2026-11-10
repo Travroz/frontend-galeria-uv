@@ -367,7 +367,7 @@ export default function Admin() {
                     </button>
                     <a
                       // URL pública de Supabase Storage corregida
-                      href={`https://ndhrggqmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modelo.archivo}`}
+                      href={`https://ndhrggmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modelo.archivo}`}
                       target="_blank"
                       rel="noreferrer"
                       className="text-sm text-gray-500 font-bold hover:underline ml-auto"
