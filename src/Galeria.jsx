@@ -4,7 +4,6 @@ import { OrbitControls, Stage, Html, useProgress } from "@react-three/drei";
 import ModelViewer from "./ModelViewer";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-// URL oficial de tu backend desplegado en Render
 const API_URL = "https://backend-galeria-uv.onrender.com";
 
 function Loader() {
@@ -49,14 +48,13 @@ export default function Galeria() {
   };
 
   return (
-    // CONTENEDOR PRINCIPAL: Tiene la imagen de fondo con filtro oscuro
     <div className="flex flex-col w-full h-screen font-sans bg-slate-800/90 bg-[url('/fondo.jpg')] bg-cover bg-center bg-fixed bg-blend-multiply overflow-hidden">
       {/* Encabezado esmerilado */}
       <header className="bg-slate-950/70 backdrop-blur-md px-6 py-4 border-b border-slate-700/50 flex justify-between items-center z-20 shadow-lg shrink-0">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 md:gap-6">
           <Link
             to="/"
-            className="w-10 h-10 bg-slate-100 hover:bg-white transition-colors rounded-sm flex items-center justify-center shadow-md cursor-pointer"
+            className="w-10 h-10 bg-slate-100 hover:bg-white transition-colors rounded-sm flex items-center justify-center shadow-md cursor-pointer shrink-0"
           >
             <svg
               className="w-6 h-6 text-slate-900"
@@ -72,7 +70,24 @@ export default function Galeria() {
               ></path>
             </svg>
           </Link>
-          <h1 className="text-xl font-semibold text-slate-100 tracking-wide drop-shadow-sm hidden md:block">
+
+          {/* ZONA DE LOGOS (PLACEHOLDERS) */}
+          <div className="flex items-center gap-3 border-l border-slate-600 pl-4 md:pl-6">
+            <img
+              // 1. REEMPLAZA ESTA RUTA POR TU IMAGEN REAL DEL FABLAB
+              src="/fablabuv-3f0ca626.webp"
+              alt="FabLab Logo"
+              className="h-8 md:h-10 w-auto object-contain drop-shadow-sm"
+            />
+            <img
+              // 2. REEMPLAZA ESTA RUTA POR TU IMAGEN REAL DE LA UV
+              src="/uv_logo_alta_rgba_blanco-2023.png"
+              alt="Universidad de Valparaíso Logo"
+              className="h-8 md:h-10 w-auto object-contain drop-shadow-sm"
+            />
+          </div>
+
+          <h1 className="text-xl font-semibold text-slate-100 tracking-wide drop-shadow-sm hidden lg:block border-l border-slate-600 pl-6 ml-2">
             Visor Interactivo
           </h1>
         </div>
@@ -81,7 +96,7 @@ export default function Galeria() {
           {modelos.length > 0 && (
             <div className="relative">
               <select
-                className="appearance-none bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-md pl-5 pr-10 py-2 outline-none shadow-sm cursor-pointer"
+                className="appearance-none bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-md pl-5 pr-10 py-2 outline-none shadow-sm cursor-pointer max-w-[150px] md:max-w-xs truncate"
                 value={modeloActivo?.id || ""}
                 onChange={handleSelect}
               >
@@ -106,7 +121,7 @@ export default function Galeria() {
       </header>
 
       <main className="flex flex-1 flex-col md:flex-row h-full overflow-hidden relative">
-        {/* PANEL IZQUIERDO (Texto): Translúcido, deja ver la imagen de fondo de la página */}
+        {/* PANEL IZQUIERDO */}
         <div className="w-full h-[40%] md:w-[35%] md:h-full bg-slate-900/80 backdrop-blur-md z-10 shadow-2xl p-10 flex flex-col border-r border-slate-700/50 overflow-y-auto">
           {modeloActivo ? (
             <div className="animate-fade-in-up mt-auto mb-auto">
@@ -128,7 +143,7 @@ export default function Galeria() {
           )}
         </div>
 
-        {/* PANEL DERECHO (Visor 3D): Fondo sólido gris claro con gradiente (tapa la imagen de fondo) */}
+        {/* PANEL DERECHO */}
         <div className="w-full h-[60%] md:w-[65%] md:h-full relative cursor-grab active:cursor-grabbing bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-100 via-slate-200 to-slate-300">
           {modeloActivo && (
             <Canvas
@@ -140,7 +155,6 @@ export default function Galeria() {
                 <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
                   <ModelViewer
                     key={modeloActivo.id}
-                    // URL corregida a Supabase Storage
                     url={`https://ndhrggmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modeloActivo.archivo}`}
                   />
                 </Stage>
@@ -155,7 +169,6 @@ export default function Galeria() {
             </Canvas>
           )}
 
-          {/* Marca de agua - Oscurecida para verse bien sobre el fondo gris claro */}
           <div className="absolute bottom-6 right-8 text-slate-400 font-bold tracking-widest opacity-50 select-none pointer-events-none z-10">
             UNIVERSIDAD DE VALPARAÍSO
           </div>
