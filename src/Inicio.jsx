@@ -36,22 +36,33 @@ export default function Inicio() {
 
   return (
     <div className="min-h-screen bg-slate-800/90 bg-[url('/fondo.jpg')] bg-cover bg-center bg-fixed bg-blend-multiply flex flex-col font-sans">
-      {/* Encabezado */}
-      <header className="bg-slate-950/70 backdrop-blur-md px-8 py-5 border-b border-slate-700/50 sticky top-0 z-50">
+      {/* Encabezado con Logos */}
+      <header className="bg-slate-950/70 backdrop-blur-md px-8 py-4 border-b border-slate-700/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-slate-100 rounded-sm flex items-center justify-center">
-              <span className="text-slate-900 font-black text-xl tracking-tighter">
-                UV
-              </span>
+          <div className="flex items-center gap-4 md:gap-6">
+            {/* ZONA DE LOGOS (PLACEHOLDERS) */}
+            <div className="flex items-center gap-4">
+              <img
+                // 1. REEMPLAZA ESTA RUTA POR TU IMAGEN REAL DEL FABLAB
+                src="/fablabuv-3f0ca626.webp"
+                alt="FabLab Logo"
+                className="h-10 md:h-12 w-auto object-contain drop-shadow-sm"
+              />
+              <img
+                // 2. REEMPLAZA ESTA RUTA POR TU IMAGEN REAL DE LA UV
+                src="/uv_logo_alta_rgba_blanco-2023.png"
+                alt="Universidad de Valparaíso Logo"
+                className="h-10 md:h-12 w-auto object-contain drop-shadow-sm"
+              />
             </div>
-            <h1 className="text-2xl font-semibold text-slate-100 tracking-wide">
+
+            <h1 className="text-xl md:text-2xl font-semibold text-slate-100 tracking-wide border-l border-slate-600 pl-4 md:pl-6 hidden sm:block">
               Repositorio Digital
             </h1>
           </div>
           <Link
             to="/admin"
-            className="text-slate-300 hover:text-white text-sm font-medium transition-colors"
+            className="text-slate-300 hover:text-white text-sm font-medium transition-colors whitespace-nowrap ml-4"
           >
             Acceso Docentes
           </Link>
@@ -89,7 +100,6 @@ export default function Inicio() {
                 >
                   <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
                     <ModelViewer
-                      // URL corregida a Supabase Storage
                       url={`https://ndhrggmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modeloDestacado.archivo}`}
                     />
                   </Stage>
@@ -111,7 +121,6 @@ export default function Inicio() {
 
         {/* SECCIÓN 2: Selector de Categorías y Opciones Desplegadas */}
         <section className="max-w-7xl mx-auto px-8 py-16">
-          {/* Barra de Filtro / Selector */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-10 bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-200/50">
             <h3 className="text-2xl font-bold text-slate-800 mb-4 md:mb-0">
               {categoriaActiva === "Todas"
@@ -152,7 +161,6 @@ export default function Inicio() {
             )}
           </div>
 
-          {/* Cuadrícula de Esculturas Filtradas */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {modelosMostrados.map((modelo) => (
               <div
@@ -191,6 +199,27 @@ export default function Inicio() {
           )}
         </section>
       </main>
+
+      {/* FOOTER: Información del FabLab UV */}
+      <footer className="bg-slate-950/80 backdrop-blur-md border-t border-slate-700/50 py-8 px-8 mt-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-sm">
+          <div className="flex flex-col items-center md:items-start">
+            <span className="font-bold text-slate-200 text-base mb-1">
+              FabLab - Universidad de Valparaíso
+            </span>
+            <span>Facultad de Ingeniería</span>
+            <span>Valparaíso, Chile</span>
+          </div>
+          <div className="text-center md:text-right">
+            <p>
+              &copy; {new Date().getFullYear()} Todos los derechos reservados.
+            </p>
+            <p className="text-xs mt-1 text-slate-500">
+              Plataforma de Preservación Tridimensional
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
