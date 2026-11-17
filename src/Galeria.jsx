@@ -71,16 +71,14 @@ export default function Galeria() {
             </svg>
           </Link>
 
-          {/* ZONA DE LOGOS (PLACEHOLDERS) */}
+          {/* ZONA DE LOGOS */}
           <div className="flex items-center gap-3 border-l border-slate-600 pl-4 md:pl-6">
             <img
-              // 1. REEMPLAZA ESTA RUTA POR TU IMAGEN REAL DEL FABLAB
               src="/fablabuv-3f0ca626.webp"
               alt="FabLab Logo"
               className="h-8 md:h-10 w-auto object-contain drop-shadow-sm"
             />
             <img
-              // 2. REEMPLAZA ESTA RUTA POR TU IMAGEN REAL DE LA UV
               src="/uv_logo_alta_rgba_blanco-2023.png"
               alt="Universidad de Valparaíso Logo"
               className="h-8 md:h-10 w-auto object-contain drop-shadow-sm"
@@ -130,13 +128,47 @@ export default function Galeria() {
                   {modeloActivo.categoria}
                 </span>
               )}
+
               <h2 className="text-4xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-400 pb-2 drop-shadow-sm">
                 {modeloActivo.titulo}
               </h2>
+
               <div className="w-16 h-1.5 bg-slate-500 rounded-full mb-8"></div>
-              <p className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap font-light drop-shadow-sm">
-                {modeloActivo.descripcion}
-              </p>
+
+              {/* NUEVOS METADATOS */}
+              <div className="space-y-3 mb-8">
+                {modeloActivo.autor && (
+                  <p className="text-slate-300 text-sm">
+                    <span className="font-bold text-slate-100 uppercase tracking-wider text-xs mr-2">
+                      Autor/Creador:
+                    </span>
+                    {modeloActivo.autor}
+                  </p>
+                )}
+                {modeloActivo.anofabricacion && (
+                  <p className="text-slate-300 text-sm">
+                    <span className="font-bold text-slate-100 uppercase tracking-wider text-xs mr-2">
+                      Fabricación:
+                    </span>
+                    {modeloActivo.anofabricacion}
+                  </p>
+                )}
+                {modeloActivo.anollegada && (
+                  <p className="text-slate-300 text-sm">
+                    <span className="font-bold text-slate-100 uppercase tracking-wider text-xs mr-2">
+                      Llegada al FabLab:
+                    </span>
+                    {modeloActivo.anollegada}
+                  </p>
+                )}
+              </div>
+
+              {/* DESCRIPCIÓN COMO PÁRRAFO FINAL */}
+              {modeloActivo.descripcion && (
+                <p className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap font-light drop-shadow-sm border-t border-slate-700/50 pt-8">
+                  {modeloActivo.descripcion}
+                </p>
+              )}
             </div>
           ) : (
             <p className="text-slate-400 m-auto font-medium">Cargando...</p>

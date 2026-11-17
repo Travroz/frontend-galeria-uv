@@ -14,6 +14,12 @@ export default function Admin() {
   const [titulo, setTitulo] = useState("");
   const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
+
+  // Nuevos estados para los campos adicionales
+  const [autor, setAutor] = useState("");
+  const [anofabricacion, setAnoFabricacion] = useState("");
+  const [anollegada, setAnoLlegada] = useState("");
+
   const [archivo, setArchivo] = useState(null);
 
   const [mensaje, setMensaje] = useState({ texto: "", tipo: "" });
@@ -66,6 +72,9 @@ export default function Admin() {
     setTitulo(modelo.titulo);
     setCategoria(modelo.categoria || "");
     setDescripcion(modelo.descripcion);
+    setAutor(modelo.autor || "");
+    setAnoFabricacion(modelo.anofabricacion || "");
+    setAnoLlegada(modelo.anollegada || "");
     setArchivo(null); // No obligamos a resubir el archivo
     setMensaje({ texto: "", tipo: "" });
     window.scrollTo({ top: 0, behavior: "smooth" }); // Subir la vista al formulario
@@ -76,6 +85,9 @@ export default function Admin() {
     setTitulo("");
     setCategoria("");
     setDescripcion("");
+    setAutor("");
+    setAnoFabricacion("");
+    setAnoLlegada("");
     setArchivo(null);
     setMensaje({ texto: "", tipo: "" });
   };
@@ -114,6 +126,10 @@ export default function Admin() {
     formData.append("titulo", titulo);
     formData.append("categoria", categoria);
     formData.append("descripcion", descripcion);
+    formData.append("autor", autor);
+    formData.append("anofabricacion", anofabricacion);
+    formData.append("anollegada", anollegada);
+
     if (archivo) formData.append("archivo3d", archivo);
 
     const url = editandoId
@@ -147,6 +163,9 @@ export default function Admin() {
           setTitulo("");
           setCategoria("");
           setDescripcion("");
+          setAutor("");
+          setAnoFabricacion("");
+          setAnoLlegada("");
           setArchivo(null);
           e.target.reset();
         }
@@ -251,7 +270,7 @@ export default function Admin() {
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-uv-azul mb-1 uppercase">
                 Título
@@ -265,18 +284,59 @@ export default function Admin() {
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-bold text-uv-azul mb-1 uppercase">
-                Categoría
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="Ej: Vasijas, Esculturas, Fósiles..."
-                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:border-uv-celeste outline-none transition-all shadow-sm"
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-              />
+            <div className="flex gap-4">
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-uv-azul mb-1 uppercase">
+                  Categoría
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Ej: Vasijas, Fósiles"
+                  className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:border-uv-celeste outline-none transition-all shadow-sm"
+                  value={categoria}
+                  onChange={(e) => setCategoria(e.target.value)}
+                />
+              </div>
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-uv-azul mb-1 uppercase">
+                  Autor / Creador
+                </label>
+                <input
+                  type="text"
+                  placeholder="Opcional"
+                  className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:border-uv-celeste outline-none transition-all shadow-sm"
+                  value={autor}
+                  onChange={(e) => setAutor(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-uv-azul mb-1 uppercase">
+                  Año de Fabricación
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ej: 1995"
+                  className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:border-uv-celeste outline-none transition-all shadow-sm"
+                  value={anofabricacion}
+                  onChange={(e) => setAnoFabricacion(e.target.value)}
+                />
+              </div>
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-uv-azul mb-1 uppercase">
+                  Año de Llegada
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ej: 2021"
+                  className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:border-uv-celeste outline-none transition-all shadow-sm"
+                  value={anollegada}
+                  onChange={(e) => setAnoLlegada(e.target.value)}
+                />
+              </div>
             </div>
 
             <div>
@@ -285,7 +345,7 @@ export default function Admin() {
               </label>
               <textarea
                 required
-                rows="4"
+                rows="3"
                 className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:border-uv-celeste outline-none transition-all shadow-sm resize-none"
                 value={descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
@@ -329,7 +389,7 @@ export default function Admin() {
         </div>
 
         {/* COLUMNA DERECHA: Lista de Figuras */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 h-[600px] flex flex-col">
+        <div className="bg-white rounded-2xl shadow-xl p-8 h-[650px] flex flex-col">
           <h3 className="text-xl font-bold text-gray-800 mb-6 border-b pb-2">
             Figuras Publicadas ({modelos.length})
           </h3>
@@ -366,7 +426,6 @@ export default function Admin() {
                       Eliminar
                     </button>
                     <a
-                      // URL pública de Supabase Storage corregida
                       href={`https://ndhrggmljybtepzmywhd.supabase.co/storage/v1/object/public/modelos/${modelo.archivo}`}
                       target="_blank"
                       rel="noreferrer"
