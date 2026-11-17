@@ -156,7 +156,7 @@ export default function Galeria() {
                 {modeloActivo.anollegada && (
                   <p className="text-slate-300 text-sm">
                     <span className="font-bold text-slate-100 uppercase tracking-wider text-xs mr-2">
-                      Llegada al FabLab:
+                      Llegada a Chile:
                     </span>
                     {modeloActivo.anollegada}
                   </p>
